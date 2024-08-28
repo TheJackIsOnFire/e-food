@@ -11,7 +11,10 @@ export default tseslint.config(
       js.configs.recommended,
       ...tseslint.configs.recommended,
       'eslint:recommended',
-      'plugin:@typescript-eslint/recommended',
+      'plugin:react/recommended',
+      'plugin:react/jsx-runtime',
+      'plugin:@typescript-eslint/recommended-type-checked',
+      'plugin:@typescript-eslint/stylistic-type-checked',
       'plugin:react-hooks/recommended',
       'plugin:prettier/recommended',
     ],
@@ -19,13 +22,17 @@ export default tseslint.config(
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
     },
+    settings: { react: { version: '18.3' } },
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
     rules: {
-      ...reactHooks.configs.recommended.rules,
+      ...React.configs.recommended.rules,
+      ...React.configs['jsx-runtime'].rules,
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
