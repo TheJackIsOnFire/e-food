@@ -9,7 +9,7 @@ export const BackGroundImg = styled.div<Props>`
   background-repeat: no-repeat;
   background-size: cover;
   color: ${colors.pink_baby};
-  position: absolute;
+  padding: 40px 0;
 
   h1 {
     display: flex;
@@ -18,7 +18,7 @@ export const BackGroundImg = styled.div<Props>`
     font-size: 36px;
     font-weight: 900;
     text-align: center;
-    margin: 162.5px auto 40px auto;
+    margin: 162.5px auto 0 auto;
   }
 `;
 
@@ -26,12 +26,12 @@ export const ImgLogo = styled.img<Props>`
   display: flex;
   width: 125px;
   height: 57.5px;
-  margin: ${props => (props.headernav ? '0' : '40px auto auto auto')};
+  margin: ${props => (props.headernav ? '0' : '0 auto')};
 `;
 
 export const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
-  margin: 40px 0 auto 0;
   align-items: center;
+  height: fit-content;
 `;
