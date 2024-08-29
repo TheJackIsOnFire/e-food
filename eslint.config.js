@@ -27,12 +27,13 @@ export default tseslint.config(
     },
     settings: { react: { version: '18.3' } },
     plugins: {
+      react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
     rules: {
-      ...React.configs.recommended.rules,
-      ...React.configs['jsx-runtime'].rules,
+      ...react.configs.recommended.rules,
+      ...react.configs['jsx-runtime'].rules,
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
