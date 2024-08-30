@@ -18,6 +18,8 @@ const RestaurantsList = ({ restaurantList }: Props) => {
             description={list.description}
             image={list.image}
             infos={list.infos}
+            typeFood={list.typeFood}
+            linkGoTo={list.linkPage}
           />
         ))}
       </ContainerList>

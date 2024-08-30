@@ -18,8 +18,10 @@ type Props = {
   title: string;
   stars: string;
   description: string;
-  infos: string[];
+  infos: string | undefined;
+  typeFood: string;
   image: string;
+  linkGoTo: string;
 };
 
 const RestaurantsCard = ({
@@ -28,6 +30,8 @@ const RestaurantsCard = ({
   description,
   image,
   infos,
+  typeFood,
+  linkGoTo,
 }: Props) => {
   return (
     <ContainerCard>
@@ -43,12 +47,17 @@ const RestaurantsCard = ({
           </StarsCard>
         </InfosTitle>
         <Description>{description}</Description>
-        <GoToRestaurant />
+        <GoToRestaurant BtnLinkPage={linkGoTo} />
       </InfosCard>
       <Infos>
-        {infos.map(info => (
-          <Tag key={info}>{info}</Tag>
-        ))}
+        {infos !== undefined ? (
+          <>
+            <Tag>{infos}</Tag>
+            <Tag>{typeFood}</Tag>
+          </>
+        ) : (
+          <Tag>{typeFood}</Tag>
+        )}
       </Infos>
     </ContainerCard>
   );
