@@ -6,6 +6,7 @@ export const ContainerCard = styled.div`
   width: 472px;
   height: 398px;
   position: relative;
+  margin-bottom: 40px;
 `;
 
 export const ImgCard = styled.div`
