@@ -5,6 +5,7 @@ import japoneseFood from '../../assets/images/japonese_food.png';
 import italianFood from '../../assets/images/italian_food.png';
 import Footer from '../../containers/Footer';
 import italianBanner from '../../assets/images/italiana.png';
+import japoneseBanner from '../../assets/images/japonesa.png';
 
 export const restaurantOptions: Restaurant[] = [
   {
@@ -15,6 +16,7 @@ export const restaurantOptions: Restaurant[] = [
     infos: 'Destaque da semana',
     typeFood: 'Japonesa',
     image: japoneseFood,
+    banner: japoneseBanner,
     linkPage: '/hioki_sushi',
     id: 1,
   },
@@ -25,8 +27,8 @@ export const restaurantOptions: Restaurant[] = [
       'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
     typeFood: 'Italiana',
     image: italianFood,
-    linkPage: '/la_dolce_vita_trattoria',
     banner: italianBanner,
+    linkPage: '/la_dolce_vita_trattoria',
     id: 2,
   },
 ];
