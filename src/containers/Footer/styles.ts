@@ -7,7 +7,6 @@ export const ContainerFooter = styled.div`
   display: block;
   background-color: ${colors.pink_light};
   padding: 40px 0;
-  justify-content: center;
 
   span {
     display: flex;

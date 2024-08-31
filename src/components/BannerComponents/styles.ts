@@ -9,7 +9,6 @@ export const BannerContainerImg = styled.div`
   background-position: bottom;
   padding: 40px 0;
   color: ${colors.white};
-  justify-content: left;
 
   div {
     height: 100%;

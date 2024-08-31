@@ -1,13 +1,15 @@
+import Foods from './Foods';
+
 class Restaurant {
   title: string;
   star: string;
   description: string;
   infos?: string | undefined;
   typeFood: string;
+  foods?: Foods[];
   image: string;
-  linkPage: string;
-  foods?: object[] | undefined;
   banner?: string | undefined;
+  linkPage: string;
   id: number;
 
   constructor(
@@ -18,7 +20,7 @@ class Restaurant {
     typeFood: string,
     image: string,
     linkPage: string,
-    foods: object[],
+    foods: Foods[],
     banner: string,
     id: number
   ) {

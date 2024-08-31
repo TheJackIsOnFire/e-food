@@ -1,14 +1,16 @@
 import Banner from '../../containers/Banner';
+import FoodList from '../../containers/FoodList/inde';
+import Footer from '../../containers/Footer';
 import Header from '../../containers/Header';
-
-import { PageContainer } from './styles';
 
 const LaDolceVitaTrattoria = () => {
   return (
-    <PageContainer>
+    <>
       <Header headernav={true} />
       <Banner linkPageRestaurant="/la_dolce_vita_trattoria" />
-    </PageContainer>
+      <FoodList linkPageRestaurant="/la_dolce_vita_trattoria" />
+      <Footer />
+    </>
   );
 };
 
