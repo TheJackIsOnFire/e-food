@@ -6,7 +6,7 @@ class Restaurant {
   description: string;
   infos?: string | undefined;
   typeFood: string;
-  foods?: Foods[];
+  foods?: Foods[] | undefined;
   image: string;
   banner?: string | undefined;
   linkPage: string;
@@ -20,7 +20,7 @@ class Restaurant {
     typeFood: string,
     image: string,
     linkPage: string,
-    foods: Foods[],
+    foods: Foods[] | undefined,
     banner: string,
     id: number
   ) {

@@ -22,7 +22,9 @@ export const ImgFood = styled.img`
 export const InfosCard = styled.div`
   width: 100%;
   height: 181px;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   color: ${colors.pink_baby};
   border: solid 1px ${colors.pink_baby};
   border-top: none;
@@ -33,7 +35,6 @@ export const InfosTitle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
 `;
 
 export const TitleCard = styled.h4`
@@ -61,8 +62,7 @@ export const Description = styled.span`
   display: block;
   width: 100%;
   font-size: 14px;
-  font-weight: 400px;
-  margin-bottom: 16px;
+  font-weight: 400;
 `;
 
 export const Infos = styled.div`
