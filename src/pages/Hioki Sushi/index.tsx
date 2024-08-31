@@ -6,7 +6,7 @@ import Header from '../../containers/Header';
 const HiokiSushi = () => {
   return (
     <>
-      <Header headernav={true} />
+      <Header headernav="active" />
       <Banner linkPageRestaurant="/hioki_sushi" />
       <FoodList linkPageRestaurant="/hioki_sushi" />
       <Footer />

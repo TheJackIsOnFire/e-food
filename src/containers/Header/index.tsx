@@ -5,7 +5,7 @@ import LinkCart from '../../components/Buttons/LinkCart';
 import RestaurantsLink from '../../components/Buttons/RestaurantsLink';
 
 export type Props = {
-  headernav: boolean;
+  headernav: 'active' | 'disable';
 };
 
 const Header = ({ headernav }: Props) => {
@@ -15,7 +15,7 @@ const Header = ({ headernav }: Props) => {
       style={{ backgroundImage: `url(${backgroundHeader})` }}
     >
       <div className="container">
-        {headernav ? (
+        {headernav === 'active' ? (
           <Nav>
             <RestaurantsLink />
             <ImgLogo headernav={headernav} src={logo} alt="Logo" />

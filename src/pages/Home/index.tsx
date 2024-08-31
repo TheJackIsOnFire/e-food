@@ -5,7 +5,7 @@ import japoneseFood from '../../assets/images/japonese_food.png';
 import italianFood from '../../assets/images/italian_food.png';
 import Footer from '../../containers/Footer';
 import italianBanner from '../../assets/images/italiana.png';
-import japoneseBanner from '../../assets/images/japonesa.png';
+import japoneseBanner from '../../assets/images/banner_japonese.png';
 import pizzaMarguerita from '../../assets/images/pizza_marguerita.png';
 import temakiSalmao from '../../assets/images/temaki.png';
 
@@ -84,7 +84,7 @@ export const restaurantOptions: Restaurant[] = [
 const Home = () => {
   return (
     <>
-      <Header headernav={false} />
+      <Header headernav="disable" />
       <RestaurantsList restaurantList={restaurantOptions} />
       <Footer />
     </>

@@ -4,8 +4,8 @@ import { Props } from './index';
 
 export const BackGroundImg = styled.div<Props>`
   width: 100%;
-  height: ${props => (props.headernav ? '186px' : '384px')};
-  display: ${props => (props.headernav ? 'flex' : 'block')};
+  height: ${props => (props.headernav === 'active' ? '186px' : '384px')};
+  display: ${props => (props.headernav === 'active' ? 'flex' : 'block')};
   background-repeat: no-repeat;
   background-size: cover;
   color: ${colors.pink_baby};
@@ -26,7 +26,7 @@ export const ImgLogo = styled.img<Props>`
   display: flex;
   width: 125px;
   height: 57.5px;
-  margin: ${props => (props.headernav ? '0' : '0 auto')};
+  margin: ${props => (props.headernav === 'active' ? '0' : '0 auto')};
 `;
 
 export const Nav = styled.nav`

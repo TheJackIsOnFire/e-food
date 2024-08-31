@@ -6,7 +6,7 @@ import Header from '../../containers/Header';
 const LaDolceVitaTrattoria = () => {
   return (
     <>
-      <Header headernav={true} />
+      <Header headernav="active" />
       <Banner linkPageRestaurant="/la_dolce_vita_trattoria" />
       <FoodList linkPageRestaurant="/la_dolce_vita_trattoria" />
       <Footer />
