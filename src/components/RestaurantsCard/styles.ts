@@ -14,9 +14,10 @@ export const ImgCard = styled.div`
   height: 217px;
 `;
 
-export const ImgFood = styled.img`
+export const ImgRestaurant = styled.img`
   width: 100%;
   height: 100%;
+  object-fit: cover;
 `;
 
 export const InfosCard = styled.div`
@@ -63,6 +64,7 @@ export const Description = styled.span`
   width: 100%;
   font-size: 14px;
   font-weight: 400;
+  text-align: justify;
 `;
 
 export const Infos = styled.div`

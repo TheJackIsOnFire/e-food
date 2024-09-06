@@ -1,5 +1,5 @@
 import RestaurantsCard from '../../components/RestaurantsCard';
-import Restaurant from '../../models/Restaurant';
+import Restaurant from '../../types/Restaurant';
 import { ContainerList } from './styles';
 
 type Props = {
@@ -13,13 +13,13 @@ const RestaurantsList = ({ restaurantList }: Props) => {
         {restaurantList.map(list => (
           <RestaurantsCard
             key={list.id}
-            title={list.title}
-            stars={list.star}
-            description={list.description}
-            image={list.image}
-            infos={list.infos}
-            typeFood={list.typeFood}
-            linkGoTo={list.linkPage}
+            title={list.titulo}
+            stars={list.avaliacao}
+            description={list.descricao}
+            image={list.capa}
+            highlighted={list.destacado}
+            typeFood={list.tipo}
+            idGoTo={list.id}
           />
         ))}
       </ContainerList>

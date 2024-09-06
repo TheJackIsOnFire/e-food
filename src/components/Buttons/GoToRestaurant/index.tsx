@@ -1,13 +1,13 @@
 import { LinkGoTo } from './styles';
 
 type Props = {
-  BtnLinkPage: string;
+  idPage: number;
 };
 
-const GoToRestaurant = ({ BtnLinkPage }: Props) => {
+const GoToRestaurant = ({ idPage }: Props) => {
   return (
     <>
-      <LinkGoTo to={BtnLinkPage}>Saiba mais</LinkGoTo>
+      <LinkGoTo to={`/product/:${idPage}`}>Saiba mais</LinkGoTo>
     </>
   );
 };

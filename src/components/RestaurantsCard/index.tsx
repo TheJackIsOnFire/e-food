@@ -6,9 +6,9 @@ import {
   StarsCard,
   TitleCard,
   CurrentStarts,
-  ImgFood,
   Infos,
   InfosTitle,
+  ImgRestaurant,
 } from './styles';
 import star from '../../assets/images/star.png';
 import Tag from '../Tag';
@@ -16,12 +16,12 @@ import GoToRestaurant from '../Buttons/GoToRestaurant';
 
 type Props = {
   title: string;
-  stars: string;
+  stars: number;
   description: string;
-  infos: string | undefined;
+  highlighted: boolean;
   typeFood: string;
   image: string;
-  linkGoTo: string;
+  idGoTo: number;
 };
 
 const RestaurantsCard = ({
@@ -29,14 +29,21 @@ const RestaurantsCard = ({
   stars,
   description,
   image,
-  infos,
+  highlighted,
   typeFood,
-  linkGoTo,
+  idGoTo,
 }: Props) => {
+  const maxLengthDescription = (maxDescription: string) => {
+    if (maxDescription.length > 263) {
+      return maxDescription.slice(0, 260) + '...';
+    }
+    return maxDescription;
+  };
+
   return (
     <ContainerCard>
       <ImgCard>
-        <ImgFood src={image} />
+        <ImgRestaurant src={image} />
       </ImgCard>
       <InfosCard>
         <InfosTitle>
@@ -46,18 +53,12 @@ const RestaurantsCard = ({
             <img src={star} alt="Star" />
           </StarsCard>
         </InfosTitle>
-        <Description>{description}</Description>
-        <GoToRestaurant BtnLinkPage={linkGoTo} />
+        <Description>{maxLengthDescription(description)}</Description>
+        <GoToRestaurant idPage={idGoTo} />
       </InfosCard>
       <Infos>
-        {infos !== undefined ? (
-          <>
-            <Tag>{infos}</Tag>
-            <Tag>{typeFood}</Tag>
-          </>
-        ) : (
-          <Tag>{typeFood}</Tag>
-        )}
+        {highlighted && <Tag>Destaque da semana</Tag>}
+        <Tag>{typeFood}</Tag>
       </Infos>
     </ContainerCard>
   );

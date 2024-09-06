@@ -1,6 +1,6 @@
 import FoodCard from '../../components/FoodCard';
-import Foods from '../../models/Foods';
-import Restaurant from '../../models/Restaurant';
+import Foods from '../../types/Foods';
+import Restaurant from '../../types/Restaurant';
 import { restaurantOptions } from '../../pages/Home';
 import { ContainerFoodList } from './styles';
 

@@ -8,7 +8,7 @@ export type Props = {
   headernav: 'active' | 'disable';
 };
 
-const Header = ({ headernav }: Props) => {
+const Header = ({ headernav = 'disable' }: Props) => {
   return (
     <BackGroundImg
       headernav={headernav}

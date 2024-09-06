@@ -1,5 +1,5 @@
 import BannerComponents from '../../components/BannerComponents';
-import Restaurant from '../../models/Restaurant';
+import Restaurant from '../../types/Restaurant';
 import { restaurantOptions } from '../../pages/Home';
 
 type Props = {
