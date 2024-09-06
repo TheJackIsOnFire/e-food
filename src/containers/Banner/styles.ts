@@ -9,6 +9,7 @@ export const BannerContainerImg = styled.div`
   background-position: bottom;
   padding: 40px 0;
   color: ${colors.white};
+  position: relative;
 
   div {
     height: 100%;
@@ -16,6 +17,18 @@ export const BannerContainerImg = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+
+  &::after {
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
   }
 `;
 

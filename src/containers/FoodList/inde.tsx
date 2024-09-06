@@ -1,32 +1,21 @@
 import FoodCard from '../../components/FoodCard';
-import Foods from '../../types/Foods';
 import Restaurant from '../../types/Restaurant';
-import { restaurantOptions } from '../../pages/Home';
 import { ContainerFoodList } from './styles';
 
 type Props = {
-  linkPageRestaurant: string;
+  foods: Restaurant;
 };
 
-const FoodList = ({ linkPageRestaurant }: Props) => {
-  const filterRestaurantByLinkPage = (setRestaurantOptions: Restaurant[]) => {
-    const filteredRestaurant = setRestaurantOptions.find(
-      restaurant => restaurant.linkPage === linkPageRestaurant
-    );
-    return { ...filteredRestaurant };
-  };
-
-  const filteredRestaurant = filterRestaurantByLinkPage(restaurantOptions);
-
+const FoodList = ({ foods }: Props) => {
   return (
     <div className="container">
       <ContainerFoodList>
-        {filteredRestaurant.foods?.map(food => (
+        {foods.cardapio.map(food => (
           <FoodCard
             key={food.id}
-            foodImg={food.image}
-            foodName={food.name}
-            foodInfos={food.descrition}
+            foodImg={food.foto}
+            foodName={food.nome}
+            foodInfos={food.descricao}
           />
         ))}
       </ContainerFoodList>

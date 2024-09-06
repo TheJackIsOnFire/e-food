@@ -7,7 +7,9 @@ type Props = {
 const GoToRestaurant = ({ idPage }: Props) => {
   return (
     <>
-      <LinkGoTo to={`/product/:${idPage}`}>Saiba mais</LinkGoTo>
+      <LinkGoTo type="link" to={`/restaurant/${idPage}`}>
+        Saiba mais
+      </LinkGoTo>
     </>
   );
 };

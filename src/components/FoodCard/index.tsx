@@ -8,11 +8,18 @@ type Props = {
 };
 
 const FoodCard = ({ foodImg, foodName, foodInfos }: Props) => {
+  const maxLengthInfos = (lengthInfos: string) => {
+    if (lengthInfos.length > 179) {
+      return lengthInfos.slice(0, 176) + '...';
+    }
+    return lengthInfos;
+  };
+
   return (
     <CardContainer>
       <FoodImg src={foodImg} />
       <FoodName>{foodName}</FoodName>
-      <FoodInfos>{foodInfos}</FoodInfos>
+      <FoodInfos>{maxLengthInfos(foodInfos)}</FoodInfos>
       <AddCart />
     </CardContainer>
   );

@@ -1,32 +1,20 @@
-import BannerComponents from '../../components/BannerComponents';
 import Restaurant from '../../types/Restaurant';
-import { restaurantOptions } from '../../pages/Home';
+import { BannerContainerImg, FoodType, RestaurantName } from './styles';
 
 type Props = {
-  linkPageRestaurant: string;
+  bannerRestaurant: Restaurant;
 };
 
-const Banner = ({ linkPageRestaurant }: Props) => {
-  const filterRestaurantByLinkPage = (setRestaurantOptions: Restaurant[]) => {
-    const filteredRestaurant = setRestaurantOptions.find(
-      restaurant => restaurant.linkPage === linkPageRestaurant
-    );
-    return [{ ...filteredRestaurant }];
-  };
-
-  const filteredRestaurant = filterRestaurantByLinkPage(restaurantOptions);
-
+const Banner = ({ bannerRestaurant }: Props) => {
   return (
-    <>
-      {filteredRestaurant.map(bannerInfos => (
-        <BannerComponents
-          key={bannerInfos.id}
-          imgBanner={bannerInfos.banner}
-          foodType={bannerInfos.typeFood}
-          restaurantName={bannerInfos.title}
-        />
-      ))}
-    </>
+    <BannerContainerImg
+      style={{ backgroundImage: `url(${bannerRestaurant.capa})` }}
+    >
+      <div className="container">
+        <FoodType>{bannerRestaurant.tipo}</FoodType>
+        <RestaurantName>{bannerRestaurant.titulo}</RestaurantName>
+      </div>
+    </BannerContainerImg>
   );
 };
 

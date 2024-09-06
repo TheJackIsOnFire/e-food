@@ -21,6 +21,7 @@ export const FoodImg = styled.img`
 export const FoodName = styled.h4`
   font-size: 16px;
   font-weight: 900;
+  letter-spacing: 0.6px;
 `;
 
 export const FoodInfos = styled.span`

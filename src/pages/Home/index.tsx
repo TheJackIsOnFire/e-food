@@ -13,6 +13,10 @@ const Home = () => {
       .then(res => setRestaurantOptions(res));
   });
 
+  if (!restaurantOptions) {
+    return <h3 style={{ padding: '20px' }}>Carregando...</h3>;
+  }
+
   return (
     <>
       <Header headernav="disable" />
