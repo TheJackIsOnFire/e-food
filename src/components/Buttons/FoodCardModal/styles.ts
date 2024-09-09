@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { colors } from '../../../styles';
 
-export const ContainerAddCart = styled.div`
+export const ContainerBtn = styled.div`
   background-color: ${colors.pink_light};
   width: 304px;
   height: 24px;
@@ -9,7 +9,7 @@ export const ContainerAddCart = styled.div`
   justify-content: center;
 `;
 
-export const BtnAddCart = styled.button`
+export const Btn = styled.button`
   background-color: ${colors.pink_light};
   color: ${colors.pink_baby};
   width: 100%;

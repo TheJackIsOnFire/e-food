@@ -11,13 +11,17 @@ const FoodList = ({ foods }: Props) => {
     <div className="container">
       <ContainerFoodList>
         {foods.cardapio.map(food => (
-          <FoodCard
-            key={food.id}
-            foodImg={food.foto}
-            foodName={food.nome}
-            foodInfos={food.descricao}
-          />
+          <li key={food.id}>
+            <FoodCard
+              foodImg={food.foto}
+              foodName={food.nome}
+              foodInfos={food.descricao}
+              foodPortion={food.porcao}
+              foodPrice={food.preco}
+            />
+          </li>
         ))}
+        {}
       </ContainerFoodList>
     </div>
   );

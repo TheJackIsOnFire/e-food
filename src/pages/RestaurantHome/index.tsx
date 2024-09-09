@@ -4,7 +4,7 @@ import Header from '../../containers/Header';
 import Restaurant from '../../types/Restaurant';
 import { useParams } from 'react-router-dom';
 import Banner from '../../containers/Banner';
-import FoodList from '../../containers/FoodList/inde';
+import FoodList from '../../containers/FoodList';
 
 const RestaurantHome = () => {
   const { id } = useParams();
