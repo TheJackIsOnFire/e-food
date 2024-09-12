@@ -16,12 +16,12 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     add: (state, action: PayloadAction<Restaurant>) => {
-      const game = state.items.find(item => item.id === action.payload.id);
+      const food = state.items.find(item => item.id === action.payload.id);
 
-      if (!game) {
+      if (!food) {
         state.items.push(action.payload);
       } else {
-        alert('O jogo já esta no carrinho');
+        alert('O item já está no carrinho.');
       }
     },
     remove: (state, action: PayloadAction<number>) => {

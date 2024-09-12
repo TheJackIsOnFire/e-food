@@ -18,7 +18,7 @@ type Props = {
   foodName: string;
   foodInfos: string;
   foodPortion: string;
-  foodPrice: number;
+  foodPrice: string;
 };
 
 const FoodCard = ({
@@ -54,7 +54,7 @@ const FoodCard = ({
             <h4>{foodName}</h4>
             <span>{foodInfos}</span>
             <span> {foodPortion}</span>
-            <BtnCardModal>{`Adicionar ao carrinho - R$ ${foodPrice}`}</BtnCardModal>
+            <BtnCardModal>{`Adicionar ao carrinho - ${foodPrice}`}</BtnCardModal>
           </ModalInfos>
           <CloseModal src={ImgClose} onClick={() => setModalIsActive(false)} />
         </ModalContent>
