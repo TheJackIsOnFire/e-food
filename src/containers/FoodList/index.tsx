@@ -20,15 +20,15 @@ const FoodList = ({ foods }: Props) => {
         {foods.cardapio.map(food => (
           <li key={food.id}>
             <FoodCard
-              foodImg={food.foto}
-              foodName={food.nome}
-              foodInfos={food.descricao}
-              foodPortion={food.porcao}
-              foodPrice={formatPrice(food.preco)}
+              id={food.id}
+              foto={food.foto}
+              preco={food.preco}
+              nome={food.nome}
+              descricao={food.descricao}
+              porcao={food.porcao}
             />
           </li>
         ))}
-        {}
       </ContainerFoodList>
     </div>
   );

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import Banner from '../../containers/Banner';
 import FoodList from '../../containers/FoodList';
 import { useGetRestaurantDataQuery } from '../../Redux/services/api';
+import Cart from '../../containers/Cart';
 
 const RestaurantHome = () => {
   const { id } = useParams();
@@ -19,6 +20,7 @@ const RestaurantHome = () => {
       <Banner bannerRestaurant={restaurantData} />
       <FoodList foods={restaurantData} />
       <Footer />
+      <Cart />
     </>
   );
 };

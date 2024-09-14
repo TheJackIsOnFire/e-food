@@ -5,7 +5,7 @@ type Props = {
   onClick?: () => void;
 };
 
-const BtnCardModal = ({ children, onClick }: Props) => {
+const BtnDefault = ({ children, onClick }: Props) => {
   return (
     <ContainerBtn>
       <Btn onClick={onClick} type="button">
@@ -15,4 +15,4 @@ const BtnCardModal = ({ children, onClick }: Props) => {
   );
 };
 
-export default BtnCardModal;
+export default BtnDefault;

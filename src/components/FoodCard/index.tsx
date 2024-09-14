@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   CardContainer,
   ModalContent,
@@ -10,24 +10,23 @@ import {
   ModalInfos,
   CloseModal,
 } from './styles';
-import BtnCardModal from '../Buttons/FoodCardModal';
+import BtnDefault from '../Buttons/Default/index';
 import ImgClose from '../../assets/images/close.png';
+import { useState } from 'react';
+import { RootReducer } from '../../Redux/store';
+import { open, add } from '../../Redux/slice/Cart/slice';
+import { formatPrice } from '../../containers/FoodList';
 
 type Props = {
-  foodImg: string;
-  foodName: string;
-  foodInfos: string;
-  foodPortion: string;
-  foodPrice: string;
+  foto: string;
+  preco: number;
+  id: number;
+  nome: string;
+  descricao: string;
+  porcao: string;
 };
 
-const FoodCard = ({
-  foodImg,
-  foodName,
-  foodInfos,
-  foodPortion,
-  foodPrice,
-}: Props) => {
+const FoodCard = ({ foto, preco, id, nome, descricao, porcao }: Props) => {
   const maxLengthInfos = (lengthInfos: string) => {
     if (lengthInfos.length > 179) {
       return lengthInfos.slice(0, 176) + '...';
@@ -37,24 +36,37 @@ const FoodCard = ({
 
   const [modalIsActive, setModalIsActive] = useState(false);
 
+  const dispatch = useDispatch();
+
+  const addCart = () => {
+    const product = { id, nome, descricao, porcao, foto, preco };
+    dispatch(add(product));
+    dispatch(open());
+    setModalIsActive(false);
+  };
+
+  const {} = useSelector((state: RootReducer) => state.cart);
+
   return (
     <>
       <CardContainer>
-        <FoodImg src={foodImg} />
-        <FoodName>{foodName}</FoodName>
-        <FoodInfos>{maxLengthInfos(foodInfos)}</FoodInfos>
-        <BtnCardModal onClick={() => setModalIsActive(true)}>
+        <FoodImg src={foto} />
+        <FoodName>{nome}</FoodName>
+        <FoodInfos>{maxLengthInfos(descricao)}</FoodInfos>
+        <BtnDefault onClick={() => setModalIsActive(true)}>
           Mais detalhes
-        </BtnCardModal>
+        </BtnDefault>
       </CardContainer>
       <Modal className={modalIsActive ? 'visible' : ''}>
         <ModalContent className="container">
-          <ImgFood src={foodImg} alt="Prato do restaurante" />
+          <ImgFood src={foto} alt="Prato do restaurante" />
           <ModalInfos>
-            <h4>{foodName}</h4>
-            <span>{foodInfos}</span>
-            <span> {foodPortion}</span>
-            <BtnCardModal>{`Adicionar ao carrinho - ${foodPrice}`}</BtnCardModal>
+            <h4>{nome}</h4>
+            <span>{descricao}</span>
+            <span> {porcao}</span>
+            <BtnDefault
+              onClick={addCart}
+            >{`Adicionar ao carrinho - ${formatPrice(preco)}`}</BtnDefault>
           </ModalInfos>
           <CloseModal src={ImgClose} onClick={() => setModalIsActive(false)} />
         </ModalContent>

@@ -1,8 +1,8 @@
 import { BackGroundImg, ImgLogo, Nav } from './styles';
 import backgroundHeader from '../../assets/images/background_header.png';
 import logo from '../../assets/images/logo.png';
-import LinkCart from '../../components/Buttons/LinkCart';
 import RestaurantsLink from '../../components/Buttons/RestaurantsLink';
+import BtnCart from '../../components/Buttons/BtnCart';
 
 export type Props = {
   headernav: 'active' | 'disable';
@@ -19,7 +19,7 @@ const Header = ({ headernav = 'disable' }: Props) => {
           <Nav>
             <RestaurantsLink />
             <ImgLogo headernav={headernav} src={logo} alt="Logo" />
-            <LinkCart />
+            <BtnCart />
           </Nav>
         ) : (
           <>
