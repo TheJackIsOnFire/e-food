@@ -51,6 +51,7 @@ export const CartItem = styled.li`
     width: 80px;
     height: 80px;
     margin-right: 16px;
+    object-fit: cover;
   }
 
   h5 {
