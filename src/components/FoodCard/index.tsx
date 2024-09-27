@@ -15,7 +15,7 @@ import ImgClose from '../../assets/images/close.png';
 import { useState } from 'react';
 import { RootReducer } from '../../Redux/store';
 import { open, add } from '../../Redux/slice/Cart/slice';
-import { formatPrice } from '../../containers/FoodList';
+import { formatPrice } from '../../utils';
 
 type Props = {
   foto: string;

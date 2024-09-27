@@ -1,6 +1,4 @@
-import MenuFoods from './MenuFoods';
-
-type Restaurant = {
+declare type Restaurant = {
   id: number;
   titulo: string;
   destacado: boolean;
@@ -10,5 +8,3 @@ type Restaurant = {
   capa: string;
   cardapio: MenuFoods[];
 };
-
-export default Restaurant;

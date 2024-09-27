@@ -1,5 +1,4 @@
 import RestaurantsCard from '../../components/RestaurantsCard';
-import Restaurant from '../../types/Restaurant';
 import { ContainerList } from './styles';
 
 type Props = {

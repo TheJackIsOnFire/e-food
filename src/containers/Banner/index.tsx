@@ -1,4 +1,3 @@
-import Restaurant from '../../types/Restaurant';
 import { BannerContainerImg, FoodType, RestaurantName } from './styles';
 
 type Props = {

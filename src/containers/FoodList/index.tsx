@@ -1,16 +1,8 @@
 import FoodCard from '../../components/FoodCard';
-import Restaurant from '../../types/Restaurant';
 import { ContainerFoodList } from './styles';
 
 type Props = {
   foods: Restaurant;
-};
-
-export const formatPrice = (price = 0) => {
-  return new Intl.NumberFormat('pt-br', {
-    style: 'currency',
-    currency: 'BRL',
-  }).format(price);
 };
 
 const FoodList = ({ foods }: Props) => {

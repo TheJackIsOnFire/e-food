@@ -3,6 +3,10 @@ import { colors } from '../../styles';
 import dump from '../../assets/images/dump.png';
 import { ContainerBtn } from '../../components/Buttons/Default/styles';
 
+type InputGroupProps = {
+  maxWidth?: string;
+};
+
 export const CartContainer = styled.div`
   position: fixed;
   top: 0;
@@ -33,6 +37,19 @@ export const SideBar = styled.aside`
   width: 100%;
   background-color: ${colors.pink_baby};
   padding: 32px 8px;
+
+  > h3 {
+    text-align: center;
+  }
+
+  h3 {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 700px;
+    line-height: 18.75px;
+    display: block;
+    color: ${colors.pink_light};
+  }
 
   ${ContainerBtn} {
     width: 100%;
@@ -90,5 +107,57 @@ export const Prices = styled.div`
     color: ${colors.pink_light};
     font-size: 14px;
     font-weight: 700;
+  }
+`;
+
+export const FormContainer = styled.form`
+  display: block;
+  color: ${colors.pink_light};
+
+  .d-flex {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .form__delivery,
+  .form__payment,
+  .form__finalize__payment {
+    margin: 24px 0;
+  }
+
+  .form__finalize__payment {
+    p {
+      margin-bottom: 16px;
+      font-size: 14px;
+      font-weight: 400px;
+    }
+  }
+`;
+
+export const InputGroup = styled.div<InputGroupProps>`
+  display: block;
+  width: ${props => props.maxWidth || 'auto'};
+  margin-top: 8px;
+
+  label {
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16.41px;
+    margin-bottom: 8px;
+  }
+
+  input {
+    display: block;
+    width: 100%;
+    height: 32px;
+    background-color: ${colors.pink_light};
+    padding: 4px 8px;
+    border: solid 1px transparent;
+  }
+
+  > ${ContainerBtn} {
+    margin-bottom: 8px;
   }
 `;

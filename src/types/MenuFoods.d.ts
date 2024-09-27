@@ -1,4 +1,4 @@
-type MenuFoods = {
+declare type MenuFoods = {
   foto: string;
   preco: number;
   id: number;
@@ -6,5 +6,3 @@ type MenuFoods = {
   descricao: string;
   porcao: string;
 };
-
-export default MenuFoods;
