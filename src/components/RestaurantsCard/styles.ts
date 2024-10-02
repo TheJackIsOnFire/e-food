@@ -36,12 +36,20 @@ export const InfosCard = styled.div`
   border: solid 1px ${colors.pink_baby};
   border-top: none;
   padding: 8px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    height: auto;
+  }
 `;
 
 export const InfosTitle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    margin-bottom: 8px;
+  }
 `;
 
 export const TitleCard = styled.h4`
@@ -71,6 +79,10 @@ export const Description = styled.span`
   font-size: 14px;
   font-weight: 400;
   text-align: justify;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    margin-bottom: 8px;
+  }
 `;
 
 export const Infos = styled.div`

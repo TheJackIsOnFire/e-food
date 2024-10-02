@@ -144,6 +144,7 @@ export const FormContainer = styled.form`
       margin-bottom: 16px;
       font-size: 14px;
       font-weight: 400px;
+      text-align: center;
     }
   }
 `;
