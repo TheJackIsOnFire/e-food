@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../styles';
+import { breakpoints, colors } from '../../styles';
 
 export const ContainerCard = styled.div`
   border: none;
@@ -7,6 +7,12 @@ export const ContainerCard = styled.div`
   height: 398px;
   position: relative;
   margin-bottom: 40px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+  }
 `;
 
 export const ImgCard = styled.div`

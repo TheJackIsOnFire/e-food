@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../styles';
+import { breakpoints, colors } from '../../styles';
 
 export const ContainerFooter = styled.div`
   width: 100%;
@@ -15,7 +15,12 @@ export const ContainerFooter = styled.div`
     font-size: 10px;
     font-weight: 400;
     text-align: center;
+    justify-content: center;
     color: ${colors.pink_baby};
+
+    @media (max-width: ${breakpoints.tablet}) {
+      width: auto;
+    }
   }
 `;
 

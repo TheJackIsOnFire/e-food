@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../styles';
+import { breakpoints, colors } from '../../styles';
 import { Props } from './index';
 
 export const BackGroundImg = styled.div<Props>`
@@ -21,6 +21,17 @@ export const BackGroundImg = styled.div<Props>`
     font-size: 36px;
     font-weight: 900;
     text-align: center;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      font-size: 32px;
+      margin-top: 40px;
+      width: auto;
+      height: auto;
+    }
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    height: auto;
   }
 `;
 

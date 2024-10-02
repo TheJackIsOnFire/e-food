@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../styles';
+import { breakpoints, colors } from '../../styles';
 import dump from '../../assets/images/dump.png';
 import { ContainerBtn } from '../../components/Buttons/Default/styles';
 
@@ -54,6 +54,11 @@ export const SideBar = styled.aside`
   ${ContainerBtn} {
     width: 100%;
   }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    max-width: 280px;
+    width: 100%;
+  }
 `;
 
 export const CartItem = styled.li`
@@ -76,6 +81,10 @@ export const CartItem = styled.li`
     font-weight: 900;
     text-align: center;
     margin-bottom: 16px;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      text-align: left;
+    }
   }
 
   span {
@@ -117,6 +126,11 @@ export const FormContainer = styled.form`
   .d-flex {
     display: flex;
     justify-content: space-between;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      flex-direction: column;
+      width: 100%;
+    }
   }
 
   .form__delivery,
@@ -163,5 +177,11 @@ export const InputGroup = styled.div<InputGroupProps>`
 
   > ${ContainerBtn} {
     margin-bottom: 8px;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 `;

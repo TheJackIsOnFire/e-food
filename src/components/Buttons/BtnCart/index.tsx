@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootReducer } from '../../../Redux/store';
+import { FaShoppingCart } from 'react-icons/fa';
 
 import { open } from '../../../Redux/slice/Cart/slice';
 
@@ -12,7 +13,10 @@ const BtnCart = () => {
   return (
     <>
       <CartBtn type="button" onClick={() => dispatch(open())}>
-        <span>{itemsCart.length}</span> produto(s) no carrinho
+        <span className="disabled">
+          {itemsCart.length} produto(s) no carrinho{' '}
+        </span>{' '}
+        <FaShoppingCart className="is-active" />
       </CartBtn>
     </>
   );
