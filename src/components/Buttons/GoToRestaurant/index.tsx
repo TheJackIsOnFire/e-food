@@ -2,12 +2,13 @@ import { LinkGoTo } from './styles';
 
 type Props = {
   idPage: number;
+  description: string;
 };
 
-const GoToRestaurant = ({ idPage }: Props) => {
+const GoToRestaurant = ({ idPage, description }: Props) => {
   return (
     <>
-      <LinkGoTo type="link" to={`/restaurant/${idPage}`}>
+      <LinkGoTo title={description} type="link" to={`/restaurant/${idPage}`}>
         Saiba mais
       </LinkGoTo>
     </>

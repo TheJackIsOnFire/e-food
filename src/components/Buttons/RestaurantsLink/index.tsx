@@ -3,7 +3,13 @@ import { RestaurantsLinkBtn } from './styles';
 const RestaurantsLink = () => {
   return (
     <>
-      <RestaurantsLinkBtn to="/">Restaurantes</RestaurantsLinkBtn>
+      <RestaurantsLinkBtn
+        type="link"
+        title="Clique aqui voltar para a página inicial"
+        to="/"
+      >
+        Restaurantes
+      </RestaurantsLinkBtn>
     </>
   );
 };

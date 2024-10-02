@@ -1,19 +1,30 @@
-import { BannerContainerImg, FoodType, RestaurantName } from './styles';
+import Loader from '../../components/Loader';
+import * as Styles from './styles';
 
 type Props = {
-  bannerRestaurant: Restaurant;
+  bannerRestaurant?: Restaurant;
+  isLoading: boolean;
 };
 
-const Banner = ({ bannerRestaurant }: Props) => {
+const Banner = ({ bannerRestaurant, isLoading }: Props) => {
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
-    <BannerContainerImg
-      style={{ backgroundImage: `url(${bannerRestaurant.capa})` }}
+    <Styles.BannerContainerImg
+      style={{
+        backgroundImage: `url(${bannerRestaurant && bannerRestaurant.capa})`,
+      }}
     >
       <div className="container">
-        <FoodType>{bannerRestaurant.tipo}</FoodType>
-        <RestaurantName>{bannerRestaurant.titulo}</RestaurantName>
+        <Styles.FoodType>
+          {bannerRestaurant && bannerRestaurant.tipo}
+        </Styles.FoodType>
+        <Styles.RestaurantName>
+          {bannerRestaurant && bannerRestaurant.titulo}
+        </Styles.RestaurantName>
       </div>
-    </BannerContainerImg>
+    </Styles.BannerContainerImg>
   );
 };
 

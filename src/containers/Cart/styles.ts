@@ -4,7 +4,7 @@ import dump from '../../assets/images/dump.png';
 import { ContainerBtn } from '../../components/Buttons/Default/styles';
 
 type InputGroupProps = {
-  maxWidth?: string;
+  maxwidth?: string;
 };
 
 export const CartContainer = styled.div`
@@ -136,7 +136,7 @@ export const FormContainer = styled.form`
 
 export const InputGroup = styled.div<InputGroupProps>`
   display: block;
-  width: ${props => props.maxWidth || 'auto'};
+  width: ${props => props.maxwidth || 'auto'};
   margin-top: 8px;
 
   label {
@@ -154,7 +154,11 @@ export const InputGroup = styled.div<InputGroupProps>`
     height: 32px;
     background-color: ${colors.pink_light};
     padding: 4px 8px;
-    border: solid 1px transparent;
+    border: solid 2px transparent;
+
+    &.error {
+      border: 2px solid red;
+    }
   }
 
   > ${ContainerBtn} {

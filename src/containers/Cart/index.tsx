@@ -1,11 +1,16 @@
+import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
+import InputMask from 'react-input-mask';
 
 import BtnDefault from '../../components/Buttons/Default';
 
 import { RootReducer } from '../../Redux/store';
 import { close, remove, clear } from '../../Redux/slice/Cart/slice';
 import { formatPrice, getTotalPrice } from '../../utils';
+import { usePurchaseMutation } from '../../Redux/services/api';
 
 import * as Style from './styles';
 
@@ -13,7 +18,10 @@ const Cart = () => {
   const { itemsCart, isOpen } = useSelector((state: RootReducer) => state.cart);
   const [continueDelivery, setContinueDelivery] = useState(false);
   const [continuePayment, setContinuePayment] = useState(false);
-  const [finalizePayment, setfinalizePayment] = useState(false);
+
+  const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation();
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -25,12 +33,107 @@ const Cart = () => {
     dispatch(remove(id));
   };
 
+  const form = useFormik({
+    initialValues: {
+      receiver: '',
+      description: '',
+      city: '',
+      zipCode: '',
+      number: '',
+      complement: '',
+      nameInCart: '',
+      numberInCart: '',
+      cardCode: '',
+      expirationMonth: '',
+      expirationYear: '',
+    },
+    validationSchema: Yup.object({
+      receiver: Yup.string().required('O campo é obrigatório'),
+      description: Yup.string().required('O campo é obrigatório'),
+      city: Yup.string().required('O campo é obrigatório'),
+      zipCode: Yup.string()
+        .min(9, 'O campo precisa ter 9 caracteres')
+        .max(9, 'O campo precisa ter 9 caracteres')
+        .required('O campo é obrigatório'),
+      number: Yup.string().required('O campo é obrigatório'),
+
+      nameInCart: Yup.string().required('O campo é obrigatório'),
+      numberInCart: Yup.string()
+        .required('O campo é obrigatório')
+        .min(19, 'O campo precisa ter três numeros')
+        .max(19, 'O campo precisa ter três numeros'),
+      cardCode: Yup.string()
+        .min(3, 'O campo precisa ter três numeros')
+        .max(3, 'O campo precisa ter três numeros')
+        .required('O campo é obrigatório'),
+      expirationMonth: Yup.string()
+        .min(2, 'O campo precisa ter dois numeros')
+        .max(2, 'O campo precisa ter dois numeros')
+        .required('O campo é obrigatório'),
+      expirationYear: Yup.string()
+        .min(4, 'O campo precisa ter quatro numeros')
+        .max(4, 'O campo precisa ter quatro numeros')
+        .required('O campo é obrigatório'),
+    }),
+    onSubmit: values => {
+      purchase({
+        delivery: {
+          receiver: values.receiver,
+          address: {
+            description: values.description,
+            city: values.city,
+            zipCode: values.zipCode,
+            number: Number(values.number),
+            complement: values.complement,
+          },
+        },
+        payment: {
+          card: {
+            name: values.nameInCart,
+            number: values.numberInCart,
+            code: Number(values.cardCode),
+            expires: {
+              month: Number(values.expirationMonth),
+              year: Number(values.expirationYear),
+            },
+          },
+        },
+        products: itemsCart.map(item => ({
+          id: item.id,
+          price: item.preco,
+        })),
+      });
+    },
+  });
+
+  const checkInputHasError = (fieldName: string) => {
+    const isTouched = fieldName in form.touched;
+    const isInvalid = fieldName in form.errors;
+    const hasError = isTouched && isInvalid;
+
+    return hasError;
+  };
+
+  useEffect(() => {
+    if (isOpen === false) {
+      setContinuePayment(false);
+      setContinueDelivery(false);
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(clear());
+    }
+  }, [isSuccess, dispatch]);
+
   const finalizePurchase = () => {
-    setfinalizePayment(false);
-    setContinuePayment(false);
-    setContinueDelivery(false);
-    dispatch(clear());
-    closeCart();
+    if (itemsCart.length === 0 && isSuccess) {
+      return dispatch(close()), navigate('/');
+    }
+    return alert(
+      'Houve um erro com a sua compra. Recarregue a página e tente novamente'
+    );
   };
 
   return (
@@ -57,7 +160,10 @@ const Cart = () => {
                   <span>Valor total</span>
                   <span>{formatPrice(getTotalPrice(itemsCart))}</span>
                 </Style.Prices>
-                <BtnDefault onClick={() => setContinueDelivery(true)}>
+                <BtnDefault
+                  type="button"
+                  onClick={() => setContinueDelivery(true)}
+                >
                   Continuar com a entrega
                 </BtnDefault>
               </>
@@ -71,50 +177,106 @@ const Cart = () => {
             )}
           </>
         ) : (
-          <Style.FormContainer>
+          <Style.FormContainer onSubmit={form.handleSubmit}>
             {!continuePayment ? (
               <>
                 <h3>Entrega</h3>
                 <div className="form__delivery">
                   <Style.InputGroup>
-                    <label htmlFor="name">Nome no cartão</label>
-                    <input id="name" type="text" name="name" />
+                    <label htmlFor="receiver">Quem irá receber</label>
+                    <input
+                      id="receiver"
+                      type="text"
+                      name="receiver"
+                      value={form.values.receiver}
+                      onChange={form.handleChange}
+                      onBlur={form.handleBlur}
+                      className={checkInputHasError('receiver') ? 'error' : ''}
+                    />
                   </Style.InputGroup>
                   <Style.InputGroup>
-                    <label htmlFor="address">Endereço</label>
-                    <input id="address" type="text" name="address" />
+                    <label htmlFor="description">Endereço</label>
+                    <input
+                      id="description"
+                      type="text"
+                      name="description"
+                      value={form.values.description}
+                      onChange={form.handleChange}
+                      onBlur={form.handleBlur}
+                      className={
+                        checkInputHasError('description') ? 'error' : ''
+                      }
+                    />
                   </Style.InputGroup>
                   <Style.InputGroup>
                     <label htmlFor="city">Cidade</label>
-                    <input id="city" type="text" name="city" />
+                    <input
+                      id="city"
+                      type="text"
+                      name="city"
+                      value={form.values.city}
+                      onChange={form.handleChange}
+                      onBlur={form.handleBlur}
+                      className={checkInputHasError('city') ? 'error' : ''}
+                    />
                   </Style.InputGroup>
                   <div className="d-flex">
-                    <Style.InputGroup maxWidth="155px">
-                      <label htmlFor="cep">CEP</label>
-                      <input id="cep" type="text" name="cep" />
+                    <Style.InputGroup maxwidth="155px">
+                      <label htmlFor="zipCode">CEP</label>
+                      <InputMask
+                        id="zipCode"
+                        type="text"
+                        name="zipCode"
+                        value={form.values.zipCode}
+                        onChange={form.handleChange}
+                        onBlur={form.handleBlur}
+                        className={checkInputHasError('zipCode') ? 'error' : ''}
+                        mask="99999-999"
+                      />
                     </Style.InputGroup>
-                    <Style.InputGroup maxWidth="155px">
+                    <Style.InputGroup maxwidth="155px">
                       <label htmlFor="number">Número</label>
-                      <input id="number" type="text" name="number" />
+                      <input
+                        id="number"
+                        type="text"
+                        name="number"
+                        value={form.values.number}
+                        onChange={form.handleChange}
+                        onBlur={form.handleBlur}
+                        className={checkInputHasError('number') ? 'error' : ''}
+                      />
                     </Style.InputGroup>
                   </div>
                   <Style.InputGroup>
                     <label htmlFor="complement">Complemento (Opcional)</label>
-                    <input id="complement" type="text" name="complement" />
+                    <input
+                      id="complement"
+                      type="text"
+                      name="complement"
+                      value={form.values.complement}
+                      onChange={form.handleChange}
+                      onBlur={form.handleBlur}
+                    />
                   </Style.InputGroup>
                 </div>
                 <Style.InputGroup>
-                  <BtnDefault onClick={() => setContinuePayment(true)}>
+                  <BtnDefault
+                    type="button"
+                    onClick={() => setContinuePayment(true)}
+                  >
                     Continuar com o Pagamento
                   </BtnDefault>
-                  <BtnDefault onClick={() => setContinueDelivery(false)}>
+                  <BtnDefault
+                    type="button"
+                    onClick={() => setContinueDelivery(false)}
+                  >
                     Voltar para o carrinho
                   </BtnDefault>
                 </Style.InputGroup>
               </>
             ) : (
               <>
-                {!finalizePayment ? (
+                {!isSuccess && !data ? (
                   <>
                     <h3>
                       Pagamento - Valor a pagar{' '}
@@ -123,50 +285,105 @@ const Cart = () => {
                     <div className="form__payment">
                       <Style.InputGroup>
                         <label htmlFor="nameInCart">Nome no cartão</label>
-                        <input id="nameInCart" type="text" name="nameInCart" />
+                        <input
+                          id="nameInCart"
+                          type="text"
+                          name="nameInCart"
+                          value={form.values.nameInCart}
+                          onChange={form.handleChange}
+                          onBlur={form.handleBlur}
+                          className={
+                            checkInputHasError('nameInCart') ? 'error' : ''
+                          }
+                        />
                       </Style.InputGroup>
                       <div className="d-flex">
-                        <Style.InputGroup maxWidth="228px">
+                        <Style.InputGroup maxwidth="228px">
                           <label htmlFor="numberInCart">Número no cartão</label>
-                          <input
+                          <InputMask
                             id="numberInCart"
                             type="text"
                             name="numberInCart"
+                            value={form.values.numberInCart}
+                            onChange={form.handleChange}
+                            onBlur={form.handleBlur}
+                            className={
+                              checkInputHasError('numberInCart') ? 'error' : ''
+                            }
+                            mask="9999 9999 9999 9999"
                           />
                         </Style.InputGroup>
-                        <Style.InputGroup maxWidth="83px">
+                        <Style.InputGroup maxwidth="83px">
                           <label htmlFor="cardCode">CVV</label>
-                          <input id="cardCode" type="text" name="cardCode" />
+                          <InputMask
+                            id="cardCode"
+                            type="text"
+                            name="cardCode"
+                            value={form.values.cardCode}
+                            onChange={form.handleChange}
+                            onBlur={form.handleBlur}
+                            className={
+                              checkInputHasError('cardCode') ? 'error' : ''
+                            }
+                            mask="999"
+                          />
                         </Style.InputGroup>
                       </div>
                       <div className="d-flex">
-                        <Style.InputGroup maxWidth="155px">
+                        <Style.InputGroup maxwidth="155px">
                           <label htmlFor="expirationMonth">
                             Mês de vencimento
                           </label>
-                          <input
+                          <InputMask
                             id="expirationMonth"
                             type="text"
                             name="expirationMonth"
+                            value={form.values.expirationMonth}
+                            onChange={form.handleChange}
+                            onBlur={form.handleBlur}
+                            className={
+                              checkInputHasError('expirationMonth')
+                                ? 'error'
+                                : ''
+                            }
+                            mask="99"
                           />
                         </Style.InputGroup>
-                        <Style.InputGroup maxWidth="155px">
+                        <Style.InputGroup maxwidth="155px">
                           <label htmlFor="expirationYear">
                             Ano de vencimento
                           </label>
-                          <input
+                          <InputMask
                             id="expirationYear"
                             type="text"
                             name="expirationYear"
+                            value={form.values.expirationYear}
+                            onChange={form.handleChange}
+                            onBlur={form.handleBlur}
+                            className={
+                              checkInputHasError('expirationYear')
+                                ? 'error'
+                                : ''
+                            }
+                            mask="9999"
                           />
                         </Style.InputGroup>
                       </div>
                     </div>
                     <Style.InputGroup>
-                      <BtnDefault onClick={() => setfinalizePayment(true)}>
-                        Finalizar pagamento
+                      <BtnDefault
+                        type="submit"
+                        onClick={form.handleSubmit}
+                        disabled={isLoading}
+                      >
+                        {isLoading
+                          ? 'Finalizando compra...'
+                          : 'Finalizar compra'}
                       </BtnDefault>
-                      <BtnDefault onClick={() => setContinuePayment(false)}>
+                      <BtnDefault
+                        type="button"
+                        onClick={() => setContinuePayment(false)}
+                      >
                         Voltar para a edição de endereço
                       </BtnDefault>
                     </Style.InputGroup>
@@ -174,7 +391,7 @@ const Cart = () => {
                 ) : (
                   <>
                     <h3>
-                      Pedido realizado - <span>(Número do pedido)</span>
+                      Pedido realizado - <span>{data?.orderId}</span>
                     </h3>
                     <div className="form__finalize__payment">
                       <p>
@@ -196,7 +413,9 @@ const Cart = () => {
                         experiência gastronômica. Bom apetite!
                       </p>
                     </div>
-                    <BtnDefault onClick={finalizePurchase}>Concluir</BtnDefault>
+                    <BtnDefault type="button" onClick={finalizePurchase}>
+                      Concluir
+                    </BtnDefault>
                   </>
                 )}
               </>

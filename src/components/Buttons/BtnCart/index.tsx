@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootReducer } from '../../../Redux/store';
-import { CartBtn } from './styles';
+
 import { open } from '../../../Redux/slice/Cart/slice';
+
+import { CartBtn } from './styles';
 
 const BtnCart = () => {
   const { itemsCart } = useSelector((state: RootReducer) => state.cart);
@@ -9,7 +11,7 @@ const BtnCart = () => {
 
   return (
     <>
-      <CartBtn onClick={() => dispatch(open())}>
+      <CartBtn type="button" onClick={() => dispatch(open())}>
         <span>{itemsCart.length}</span> produto(s) no carrinho
       </CartBtn>
     </>

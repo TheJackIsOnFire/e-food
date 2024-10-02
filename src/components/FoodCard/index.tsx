@@ -1,21 +1,15 @@
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  CardContainer,
-  ModalContent,
-  FoodImg,
-  FoodInfos,
-  FoodName,
-  ImgFood,
-  Modal,
-  ModalInfos,
-  CloseModal,
-} from './styles';
+
 import BtnDefault from '../Buttons/Default/index';
+
 import ImgClose from '../../assets/images/close.png';
+
 import { useState } from 'react';
 import { RootReducer } from '../../Redux/store';
 import { open, add } from '../../Redux/slice/Cart/slice';
 import { formatPrice } from '../../utils';
+
+import * as Styles from './styles';
 
 type Props = {
   foto: string;
@@ -49,29 +43,33 @@ const FoodCard = ({ foto, preco, id, nome, descricao, porcao }: Props) => {
 
   return (
     <>
-      <CardContainer>
-        <FoodImg src={foto} />
-        <FoodName>{nome}</FoodName>
-        <FoodInfos>{maxLengthInfos(descricao)}</FoodInfos>
-        <BtnDefault onClick={() => setModalIsActive(true)}>
+      <Styles.CardContainer>
+        <Styles.FoodImg src={foto} />
+        <Styles.FoodName>{nome}</Styles.FoodName>
+        <Styles.FoodInfos>{maxLengthInfos(descricao)}</Styles.FoodInfos>
+        <BtnDefault type="button" onClick={() => setModalIsActive(true)}>
           Mais detalhes
         </BtnDefault>
-      </CardContainer>
-      <Modal className={modalIsActive ? 'visible' : ''}>
-        <ModalContent className="container">
-          <ImgFood src={foto} alt="Prato do restaurante" />
-          <ModalInfos>
+      </Styles.CardContainer>
+      <Styles.Modal className={modalIsActive ? 'visible' : ''}>
+        <Styles.ModalContent className="container">
+          <Styles.ImgFood src={foto} alt="Prato do restaurante" />
+          <Styles.ModalInfos>
             <h4>{nome}</h4>
             <span>{descricao}</span>
             <span> {porcao}</span>
             <BtnDefault
+              type="button"
               onClick={addCart}
             >{`Adicionar ao carrinho - ${formatPrice(preco)}`}</BtnDefault>
-          </ModalInfos>
-          <CloseModal src={ImgClose} onClick={() => setModalIsActive(false)} />
-        </ModalContent>
+          </Styles.ModalInfos>
+          <Styles.CloseModal
+            src={ImgClose}
+            onClick={() => setModalIsActive(false)}
+          />
+        </Styles.ModalContent>
         <div className="overlay" onClick={() => setModalIsActive(false)}></div>
-      </Modal>
+      </Styles.Modal>
     </>
   );
 };

@@ -1,24 +1,27 @@
+import { useParams } from 'react-router-dom';
+
 import Footer from '../../containers/Footer';
 import Header from '../../containers/Header';
-import { useParams } from 'react-router-dom';
 import Banner from '../../containers/Banner';
 import FoodList from '../../containers/FoodList';
-import { useGetRestaurantDataQuery } from '../../Redux/services/api';
 import Cart from '../../containers/Cart';
 
-const RestaurantHome = () => {
-  const { id } = useParams();
-  const { data: restaurantData } = useGetRestaurantDataQuery(id!);
+import { useGetRestaurantDataQuery } from '../../Redux/services/api';
 
-  if (!restaurantData) {
-    return <h3 style={{ padding: '20px' }}>Carregando...</h3>;
-  }
+type RestaurantParams = {
+  id: string;
+};
+
+const RestaurantHome = () => {
+  const { id } = useParams() as RestaurantParams;
+  const { data: restaurantData, isLoading: isLoadingData } =
+    useGetRestaurantDataQuery(id);
 
   return (
     <>
       <Header headernav="active" />
-      <Banner bannerRestaurant={restaurantData} />
-      <FoodList foods={restaurantData} />
+      <Banner bannerRestaurant={restaurantData} isLoading={isLoadingData} />
+      <FoodList foods={restaurantData} isLoading={isLoadingData} />
       <Footer />
       <Cart />
     </>

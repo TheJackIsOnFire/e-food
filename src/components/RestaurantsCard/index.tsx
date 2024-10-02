@@ -1,18 +1,9 @@
-import {
-  ContainerCard,
-  Description,
-  ImgCard,
-  InfosCard,
-  StarsCard,
-  TitleCard,
-  CurrentStarts,
-  Infos,
-  InfosTitle,
-  ImgRestaurant,
-} from './styles';
-import star from '../../assets/images/star.png';
 import Tag from '../Tag';
 import GoToRestaurant from '../Buttons/GoToRestaurant';
+
+import star from '../../assets/images/star.png';
+
+import * as Styles from './styles';
 
 type Props = {
   title: string;
@@ -41,26 +32,31 @@ const RestaurantsCard = ({
   };
 
   return (
-    <ContainerCard>
-      <ImgCard>
-        <ImgRestaurant src={image} />
-      </ImgCard>
-      <InfosCard>
-        <InfosTitle>
-          <TitleCard>{title}</TitleCard>
-          <StarsCard>
-            <CurrentStarts>{stars}</CurrentStarts>
+    <Styles.ContainerCard>
+      <Styles.ImgCard>
+        <Styles.ImgRestaurant src={image} />
+      </Styles.ImgCard>
+      <Styles.InfosCard>
+        <Styles.InfosTitle>
+          <Styles.TitleCard>{title}</Styles.TitleCard>
+          <Styles.StarsCard>
+            <Styles.CurrentStarts>{stars}</Styles.CurrentStarts>
             <img src={star} alt="Star" />
-          </StarsCard>
-        </InfosTitle>
-        <Description>{maxLengthDescription(description)}</Description>
-        <GoToRestaurant idPage={idGoTo} />
-      </InfosCard>
-      <Infos>
+          </Styles.StarsCard>
+        </Styles.InfosTitle>
+        <Styles.Description>
+          {maxLengthDescription(description)}
+        </Styles.Description>
+        <GoToRestaurant
+          description={`Clique aqui para ser ir à página do restaurante - ${title}`}
+          idPage={idGoTo}
+        />
+      </Styles.InfosCard>
+      <Styles.Infos>
         {highlighted && <Tag>Destaque da semana</Tag>}
         <Tag>{typeFood}</Tag>
-      </Infos>
-    </ContainerCard>
+      </Styles.Infos>
+    </Styles.ContainerCard>
   );
 };
 
